@@ -14,9 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import org.duckdns.spacedock.liblifepath.PathNavigator;
 
 /**
@@ -35,10 +35,10 @@ public class PathController implements Initializable
     private final PathNavigator m_navigator = new PathNavigator();
 
     @FXML
-    private VBox mainBox;
+    private VBox fx_vBox;
 
     @FXML
-    private ScrollPane scrollPane;
+    private TextFlow fx_tFlow;
 
     /**
      * callback du bouton Back de l'interface : retour au menu principal si on
@@ -55,9 +55,9 @@ public class PathController implements Initializable
 
 	    m_navigator.rollback();//après la suppression des boutons, sinon on cherchera à enlever ceux du choix d'avant (déjà retirés)
 
-	    ObservableList<Node> mainBoxChildren = mainBox.getChildren();
-	    int totalItemsNumber = mainBoxChildren.size();
-	    mainBoxChildren.remove(totalItemsNumber - 1);//on retire le texte actuellement affiché
+	    ObservableList<Node> tFlowChildren = fx_tFlow.getChildren();
+	    int totalItemsNumber = tFlowChildren.size();
+	    tFlowChildren.remove(totalItemsNumber - 1);//on retire le texte actuellement affiché
 
 	    displayCurrentChoiceButtons();//on replace les boutons correspondant au choix précédent
 	}
@@ -106,7 +106,7 @@ public class PathController implements Initializable
     private void removeDisplayedButtons()
     {
 	int toDelete = m_navigator.getCurrentChoice().decisionsPossibles.size();
-	ObservableList<Node> mainBoxChildren = mainBox.getChildren();
+	ObservableList<Node> mainBoxChildren = fx_vBox.getChildren();
 	int totalItemsNumber = mainBoxChildren.size();
 
 	mainBoxChildren.remove(totalItemsNumber - toDelete, totalItemsNumber);
@@ -120,7 +120,7 @@ public class PathController implements Initializable
      */
     private void displayCurrentChoiceButtons()
     {
-	ObservableList<Node> mainBoxChildren = mainBox.getChildren();
+	ObservableList<Node> mainBoxChildren = fx_vBox.getChildren();
 
 	for (Map.Entry<String, String> entry : m_navigator.getCurrentChoice().decisionsPossibles.entrySet())
 	{//pour chaque entrée dans les choix possibles du node actuel
@@ -146,9 +146,11 @@ public class PathController implements Initializable
      */
     private void displayCurrentChoice()
     {
-	Text text = new Text(m_navigator.getCurrentChoice().desc);
-	text.wrappingWidthProperty().bind(mainBox.widthProperty().subtract(15));
-	mainBox.getChildren().add(new Text(m_navigator.getCurrentChoice().desc));
+	Text text = new Text(m_navigator.getCurrentChoice().desc + "\n");
+	//text.wrappingWidthProperty().bind(bigPane.widthProperty().subtract(15));
+
+	fx_tFlow.getChildren().add(text);
+
 	displayCurrentChoiceButtons();
     }
 }

@@ -11,8 +11,8 @@
     <center>
 	<ScrollPane hbarPolicy="NEVER" pannable="true" fitToWidth="true" fx:id="scrollPane" >
 	    <content>
-		<VBox fx:id="mainBox" >
-
+		<VBox fx:id="fx_vBox">
+		    <TextFlow fx:id="fx_tFlow"/>
 		</VBox>
 	    </content>
 	</ScrollPane>

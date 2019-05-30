@@ -26,7 +26,7 @@ public class LifepathFX extends Application
 
 	Scene scene = new Scene(root);//pas de taille, on utilise un stage fullscreen ensuite
 
-	stage.setTitle("FXML Welcome");//TODO Strings i18n
+	stage.setTitle("Lifepath");//TODO Strings i18n
 	stage.setScene(scene);
 
 	//scene.getStylesheets().add(Form.class.getResource("Form.css").toExternalForm());//incantation pour le css TODO pourquoi le class.getressource?
@@ -45,5 +45,4 @@ public class LifepathFX extends Application
     {
 	launch(args);
     }
-
 }
