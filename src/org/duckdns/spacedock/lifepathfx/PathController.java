@@ -5,6 +5,7 @@
  */
 package org.duckdns.spacedock.lifepathfx;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -39,6 +40,10 @@ public class PathController implements Initializable
 
     @FXML
     private TextFlow fx_tFlow;
+
+    public PathController() throws FileNotFoundException
+    {//TODO faire quelque chose si l'éxception est levée...
+    }
 
     /**
      * callback du bouton Back de l'interface : retour au menu principal si on
